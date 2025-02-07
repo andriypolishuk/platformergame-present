@@ -1,0 +1,15 @@
+canvas {
+    display: block;
+}
+.game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+.rules{
+    background-color: rgb(26, 26, 26);
+    color: white;
+    padding: 15px;
+}
