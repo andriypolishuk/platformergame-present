@@ -9,12 +9,12 @@ const frameDuration = 1000 / targetFPS;
 let level = 1;
 let isLevelChanging = false;
 
-const acceleration = 0.5;   // Плавний розгін
-const maxSpeed = 7;         // Максимальна швидкість
+const acceleration = 1200;   // Плавний розгін
+const maxSpeed = 500;         // Максимальна швидкість
 const friction = 0.8;
 const player = {
     x: 50, y: 700, width: 30, height: 30,
-    dx: 0, dy: 0, speed: 7, gravity: 0.5, jumpPower: -12, onGround: false
+    dx: 0, dy: 0, speed: 7, gravity: 2000, jumpPower: -800, onGround: false
 };
 
 // Платформи
@@ -282,7 +282,37 @@ let colors = {
 let platforms = levels[level]
 
 function changeLevel(newLevel) {
-    if(level == 8){
+    if (level == 8) {
+        alert('Перемога!')
+    }
+    if (levels[newLevel]) {
+        level = newLevel;
+        level += 1;
+        player.x = 50;
+        player.y = 700;
+        platforms = levels[level];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function changeLevel(newLevel) {
+    if (level == 8) {
         alert('Перемога!')
     }
     if (levels[newLevel]) {
@@ -301,14 +331,14 @@ function update(deltaTime) {
     player.y += player.dy * deltaTime;
 
     // Гравітація
-    player.dy += player.gravity;
+    player.dy += player.gravity * deltaTime;
 
     // Плавний розгін при натисканні клавіші (тільки якщо гравець на платформі)
     if (keys.right && player.onGround) {
-        player.dx += acceleration;  // Рух вправо
+        player.dx += acceleration * deltaTime;  // Рух вправо
     }
     if (keys.left && player.onGround) {
-        player.dx -= acceleration;  // Рух вліво
+        player.dx -= acceleration * deltaTime;  // Рух вліво
     }
     // Стрибок (тільки якщо гравець на землі)
     if (keys.up && player.onGround) {
@@ -326,7 +356,7 @@ function update(deltaTime) {
 
     // Зменшення швидкості за допомогою тертя, якщо клавіша не натиснута
     if (!keys.right && !keys.left) {
-        player.dx *= friction;
+        player.dx *= Math.pow(friction, deltaTime * 60);
     }
     if (keys.next && !isLevelChanging) {
         isLevelChanging = true; // Встановлюємо прапор, щоб уникнути кількох спроб змінити рівень
@@ -338,10 +368,6 @@ function update(deltaTime) {
             isLevelChanging = false; // Скидаємо прапор після затримки
         }, 1000); // Затримка 1 секунда
     }
-    // Оновлюємо координати гравця
-
-    player.x += player.dx;
-    player.y += player.dy;
 
     // Перевірка меж
     if (player.x < 0) player.x = 0;
@@ -354,49 +380,51 @@ function update(deltaTime) {
 
     // Колізія з платформами
     platforms.forEach(p => {
-        // Колізія лівої сторони (зупинка руху вліво)
-        if (player.x + player.width >= p.x && player.x + player.width < p.x + 7 && player.y + player.height > p.y + 1 && player.y < p.y + p.height) {
+        // Ліва сторона
+        if (player.x + player.width >= p.x && player.x + player.width < p.x + 7 &&
+            player.y + player.height > p.y + 1 && player.y < p.y + p.height) {
             if (player.x + player.width > p.x && player.y + player.height > p.y + 1 && player.y < p.y + p.height) {
-                player.x = p.x - player.width; // Переміщення гравця ліворуч від платформи
-                if (player.dx > 0) {
-                    player.dx = 0; // Зупинка горизонтального руху
-                }
+                player.x = p.x - player.width;
+                if (player.dx > 0) player.dx = 0;
             }
-            // Перевірка, чи не виходить гравець за межі канвасу
             if (player.x < 0) player.x = 0;
         }
 
-        // Колізія правої сторони (зупинка руху вправо)
-        if (player.x <= p.x + p.width && player.x > p.x + p.width - 7 && player.y + player.height > p.y + 1 && player.y < p.y + p.height) {
+        // Права сторона
+        if (player.x <= p.x + p.width && player.x > p.x + p.width - 7 &&
+            player.y + player.height > p.y + 1 && player.y < p.y + p.height) {
             if (player.x < p.x + p.width && player.y + player.height > p.y + 1 && player.y < p.y + p.height) {
-                player.x = p.x + p.width; // Переміщення гравця праворуч від платформи
-                if (player.dx < 0) {
-                    player.dx = 0; // Зупинка горизонтального руху
-                }
+                player.x = p.x + p.width;
+                if (player.dx < 0) player.dx = 0;
             }
-            // Перевірка, чи не виходить гравець за межі канвасу
             if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
         }
 
-        // Перевірка колізії зверху (стрибок на платформу)
-        if (player.y + player.height > p.y - 1 && player.y + player.height <= p.y + player.dy && player.x + player.width > p.x && player.x < p.x + p.width) {
-            player.y = p.y - player.height; // Гравець стає на платформу
-            player.dy = 0; // Зупинка вертикального руху
-            player.onGround = true; // Гравець на землі
+        // Зверху (стрибок на платформу)
+        if (player.y + player.height > p.y - 1 &&
+            player.y + player.height <= p.y + player.dy * deltaTime &&   // <-- ось тут
+            player.x + player.width > p.x && player.x < p.x + p.width) {
+            player.y = p.y - player.height;
+            player.dy = 0;
+            player.onGround = true;
         }
-        // Перевірка колізії знизу (якщо гравець падає через платформу)
-        if (player.y <= p.y + p.height && player.y > p.y && player.x + player.width > p.x && player.x < p.x + p.width) {
+
+        // Знизу (удар головою)
+        if (player.y <= p.y + p.height && player.y > p.y &&
+            player.x + player.width > p.x && player.x < p.x + p.width) {
             if (player.y < p.y + p.height) {
-                player.y = p.y + p.height; // Гравець переміщається під платформу
-                player.dy = 0; // Зупинка падіння
-                player.onGround = false; // Гравець більше не на платформі
+                player.y = p.y + p.height;
+                player.dy = 0;
+                player.onGround = false;
             }
         }
+
         if (player.y < 0) {
-            player.dy = 0
-            player.y = 0
+            player.dy = 0;
+            player.y = 0;
         }
     });
+
 
 
 
@@ -413,6 +441,20 @@ function update(deltaTime) {
     // Скидання гравця, якщо він вийшов за межі екрану
     if (player.y > canvas.height) player.y = 300;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function isPointInTriangle(px, py, triangle) {
     const x1 = triangle[0].x, y1 = triangle[0].y;
     const x2 = triangle[1].x, y2 = triangle[1].y;
