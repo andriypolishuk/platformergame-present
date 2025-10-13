@@ -320,7 +320,7 @@ let colors = {
 let platforms = levels[level]
 
 function changeLevel(newLevel) {
-    if (level == 8) {
+    if (level == colors.length) {
         alert('Перемога!')
     }
     if (levels[newLevel]) {
@@ -608,4 +608,5 @@ document.addEventListener("keyup", (e) => {
 });
 
 gameLoop();
+
 
