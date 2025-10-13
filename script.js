@@ -320,37 +320,7 @@ let colors = {
 let platforms = levels[level]
 
 function changeLevel(newLevel) {
-    if (level == colors.length) {
-        alert('Перемога!')
-    }
-    if (levels[newLevel]) {
-        level = newLevel;
-        level += 1;
-        player.x = 50;
-        player.y = 700;
-        platforms = levels[level];
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function changeLevel(newLevel) {
-    if (level == 8) {
+    if (level == 11) {
         alert('Перемога!')
     }
     if (levels[newLevel]) {
