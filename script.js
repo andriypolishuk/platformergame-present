@@ -118,6 +118,37 @@ let levels = {
         { x: 1000, y: 300, width: 150, height: 20 },
         { x: 1200, y: 200, width: 150, height: 20 },
     ],
+    11: [
+        { x: 0, y: 750, width: 1400, height: 50 }, // Підлога
+        { x: 200, y: 650, width: 100, height: 20 },
+        { x: 400, y: 550, width: 100, height: 20 },
+        { x: 600, y: 450, width: 100, height: 20 },
+        { x: 800, y: 350, width: 100, height: 20 },
+        { x: 1000, y: 250, width: 100, height: 20 },
+        { x: 1200, y: 150, width: 150, height: 20 } // Фінальна платформа
+    ],
+    12: [
+        { x: 0, y: 750, width: 1400, height: 50 }, // Підлога
+        { x: 0, y: 600, width: 50, height: 20 }, // Ліва стіна-початок
+        { x: 150, y: 450, width: 250, height: 20 },
+        { x: 500, y: 300, width: 300, height: 20 },
+        { x: 950, y: 150, width: 450, height: 20 }
+    ],
+    13: [ // Стрибки з точністю (вузькі платформи)
+        { x: 0, y: 750, width: 1400, height: 50 }, // Підлога
+        { x: 150, y: 650, width: 50, height: 20 },
+        { x: 350, y: 550, width: 50, height: 20 },
+        { x: 550, y: 450, width: 50, height: 20 },
+        { x: 750, y: 350, width: 50, height: 20 },
+        { x: 950, y: 250, width: 50, height: 20 },
+        { x: 1150, y: 150, width: 150, height: 20 } // Фінальна платформа
+    ],
+    14: [ // Тунель з шипами
+        { x: 0, y: 750, width: 1400, height: 50 }, // Підлога
+        { x: 0, y: 650, width: 1400, height: 20 }, // Стеля тунелю 1
+        { x: 0, y: 400, width: 1400, height: 20 }, // Стеля тунелю 2
+        { x: 0, y: 200, width: 1400, height: 20 } // Стеля тунелю 3
+    ]
 
 
 };
@@ -152,6 +183,18 @@ let finishlevel = {
     ],
     10: [
         { x: 1360, y: 0, width: 20, height: 150 }
+    ],
+    11: [
+        { x: 1350, y: 0, width: 20, height: 150 } // Фініш над останньою платформою
+    ],
+    12: [
+        { x: 1380, y: 0, width: 20, height: 150 } // Фініш наприкінці
+    ],
+    13: [
+        { x: 1300, y: 0, width: 20, height: 150 } // Фініш після вузьких платформ
+    ],
+    14: [
+        { x: 1380, y: 0, width: 20, height: 200 } // Фініш наприкінці тунелю
     ]
 
 };
@@ -282,6 +325,47 @@ let shiplevel = {
         { x: 1000, y: 280 },
         { x: 1020, y: 280 },
     ],
+    11: [ // Шипи між сходинками
+        { x: 320, y: 725 },
+        { x: 345, y: 725 },
+        { x: 520, y: 625 },
+        { x: 545, y: 625 },
+        { x: 720, y: 525 },
+        { x: 745, y: 525 },
+        { x: 920, y: 425 },
+        { x: 945, y: 425 },
+        { x: 1120, y: 325 },
+        { x: 1145, y: 325 }
+    ],
+    12: [ // Шипи на стінах і підлозі
+        { x: 50, y: 725 }, { x: 75, y: 725 }, { x: 100, y: 725 },
+        { x: 50, y: 575 }, { x: 75, y: 575 }, { x: 100, y: 575 },
+        { x: 150, y: 425 }, { x: 175, y: 425 },
+        { x: 500, y: 275 }, { x: 525, y: 275 },
+        { x: 950, y: 125 }, { x: 975, y: 125 }
+    ],
+    13: [ // Шипи під вузькими платформами
+        { x: 250, y: 725 }, { x: 275, y: 725 },
+        { x: 450, y: 625 }, { x: 475, y: 625 },
+        { x: 650, y: 525 }, { x: 675, y: 525 },
+        { x: 850, y: 425 }, { x: 875, y: 425 },
+        { x: 1050, y: 325 }, { x: 1075, y: 325 },
+    ],
+    14: [ // Тунель смерті: шипи знизу та зверху
+    // Шипи на підлозі
+        { x: 0, y: 725 }, { x: 25, y: 725 }, { x: 50, y: 725 }, { x: 75, y: 725 }, { x: 100, y: 725 },
+    // Шипи на стелі 1 (між y=650 і y=750)
+        { x: 150, y: 670, upsideDown: true }, { x: 175, y: 670, upsideDown: true }, { x: 200, y: 670, upsideDown: true },
+        { x: 300, y: 670, upsideDown: true }, { x: 325, y: 670, upsideDown: true }, { x: 350, y: 670, upsideDown: true },
+    // Шипи на підлозі тунелю 2 (y=670)
+        { x: 500, y: 625 }, { x: 525, y: 625 }, { x: 550, y: 625 },
+    // Шипи на стелі 2 (між y=400 і y=650)
+        { x: 600, y: 420, upsideDown: true }, { x: 625, y: 420, upsideDown: true }, { x: 650, y: 420, upsideDown: true },
+    // Шипи на підлозі тунелю 3 (y=400)
+        { x: 800, y: 375 }, { x: 825, y: 375 }, { x: 850, y: 375 },
+    // Шипи на стелі 3 (між y=200 і y=400)
+        { x: 900, y: 220, upsideDown: true }, { x: 925, y: 220, upsideDown: true }, { x: 950, y: 220, upsideDown: true },
+    ]
 
 };
 let colors = {
@@ -476,6 +560,68 @@ function isPointInTriangle(px, py, triangle) {
     return (area1 + area2 + area3 === areaOrig);
 }
 
+// function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//     // Платформи
+//     if (levels[level][0] != null) {
+//         ctx.fillStyle = colors[level][0].plat;
+//         platforms.forEach(p => ctx.fillRect(p.x, p.y, p.width, p.height));
+//     }
+//     // Фініши
+//     if (finishlevel[level][0] != null) {
+//         ctx.fillStyle = "yellow";
+//         finishlevel[level].forEach(f => ctx.fillRect(f.x, f.y, f.width, f.height));
+//     }
+//     if (shiplevel[level][0] != null) {
+//         // Малюємо трикутники з масиву finishlevel
+//         shiplevel[level].forEach(t => {
+//             const triangle = [
+//                 { x: t.x, y: t.y + 25 },   // Перша точка
+//                 { x: t.x + 25, y: t.y + 25 }, // Друга точка
+//                 { x: t.x + 12.5, y: t.y }     // Третя точка
+//             ];
+
+//             // Малюємо трикутник
+//             ctx.fillStyle = colors[level][0].ship;
+//             ctx.beginPath();
+//             ctx.moveTo(t.x, t.y + 25);  // Початкова точка
+//             ctx.lineTo(t.x + 25, t.y + 25);  // Друга точка
+//             ctx.lineTo(t.x + 12.5, t.y);   // Третя точка
+//             ctx.closePath();       // Закриваємо шлях
+//             ctx.fill();
+
+//             // Перевірка, чи точка гравця знаходиться всередині трикутника
+//             const playerCorners = [
+//                 { x: player.x, y: player.y },  // Верхній лівий кут
+//                 { x: player.x + player.width, y: player.y },  // Верхній правий кут
+//                 { x: player.x, y: player.y + player.height },  // Нижній лівий кут
+//                 { x: player.x + player.width, y: player.y + player.height }  // Нижній правий кут
+//             ];
+
+//             let isPlayerInside = false;
+
+//             // Перевіряємо кожну точку гравця
+//             for (let corner of playerCorners) {
+//                 if (isPointInTriangle(corner.x, corner.y, triangle)) {
+//                     isPlayerInside = true;
+//                     break;
+//                 }
+//             }
+
+//             // Якщо хоча б одна точка гравця всередині трикутника
+//             if (isPlayerInside) {
+//                 player.x = 50;
+//                 player.y = 700; // Переміщуємо гравця
+//             }
+//         });
+//     }
+
+//     // Гравець
+//     ctx.fillStyle = "black";
+//     ctx.fillRect(player.x, player.y, player.width, player.height);
+// }
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -491,20 +637,36 @@ function draw() {
     }
     if (shiplevel[level][0] != null) {
         // Малюємо трикутники з масиву finishlevel
-        shiplevel[level].forEach(t => {
-            const triangle = [
-                { x: t.x, y: t.y + 25 },   // Перша точка
-                { x: t.x + 25, y: t.y + 25 }, // Друга точка
-                { x: t.x + 12.5, y: t.y }     // Третя точка
-            ];
+       shiplevel[level].forEach(t => {
+            let triangle;
+            const triangleHeight = 25;
+            const triangleWidth = 25;
+            const tipX = t.x + triangleWidth / 2;
 
+            if (t.upsideDown) {
+                // Перевернутий шип (вістрям донизу)
+                triangle = [
+                    { x: t.x, y: t.y },          // Верхній лівий
+                    { x: t.x + triangleWidth, y: t.y }, // Верхній правий
+                    { x: tipX, y: t.y + triangleHeight } // Нижнє вістря
+                ];
+            } else {
+                // Звичайний шип (вістрям догори)
+                triangle = [
+                    { x: t.x, y: t.y + triangleHeight },  // Нижній лівий
+                    { x: t.x + triangleWidth, y: t.y + triangleHeight }, // Нижній правий
+                    { x: tipX, y: t.y } // Верхнє вістря
+                ];
+            }
+
+            
             // Малюємо трикутник
             ctx.fillStyle = colors[level][0].ship;
             ctx.beginPath();
-            ctx.moveTo(t.x, t.y + 25);  // Початкова точка
-            ctx.lineTo(t.x + 25, t.y + 25);  // Друга точка
-            ctx.lineTo(t.x + 12.5, t.y);   // Третя точка
-            ctx.closePath();       // Закриваємо шлях
+            ctx.moveTo(triangle[0].x, triangle[0].y);
+            ctx.lineTo(triangle[1].x, triangle[1].y);
+            ctx.lineTo(triangle[2].x, triangle[2].y);
+            ctx.closePath();
             ctx.fill();
 
             // Перевірка, чи точка гравця знаходиться всередині трикутника
@@ -578,6 +740,7 @@ document.addEventListener("keyup", (e) => {
 });
 
 gameLoop();
+
 
 
 
