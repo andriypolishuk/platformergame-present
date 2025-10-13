@@ -470,7 +470,7 @@ function update(deltaTime) {
                 changeLevel(level); // Зміна рівня
             }
             isLevelChanging = false; // Скидаємо прапор після затримки
-        }, 1000); // Затримка 1 секунда
+        }, 500); // Затримка 1 секунда
     }
 
     // Перевірка меж
@@ -752,6 +752,7 @@ document.addEventListener("keyup", (e) => {
 });
 
 gameLoop();
+
 
 
 
