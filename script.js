@@ -102,6 +102,22 @@ let levels = {
         { x: 300, y: 0, width: 20, height: 100 },
 
     ],
+    9: [
+        { x: 0, y: 750, width: 1400, height: 50 },
+        { x: 200, y: 650, width: 100, height: 20 },
+        { x: 400, y: 550, width: 100, height: 20 },
+        { x: 600, y: 450, width: 100, height: 20 },
+        { x: 800, y: 350, width: 100, height: 20 },
+        { x: 1000, y: 250, width: 100, height: 20 },  
+    ],
+    10: [
+        { x: 0, y: 750, width: 1400, height: 50 },
+        { x: 100, y: 600, width: 200, height: 20 },
+        { x: 400, y: 500, width: 150, height: 20 },
+        { x: 700, y: 400, width: 150, height: 20 },
+        { x: 1000, y: 300, width: 150, height: 20 },
+        { x: 1200, y: 200, width: 150, height: 20 },
+    ],
 
 
 };
@@ -131,6 +147,12 @@ let finishlevel = {
     8: [  // новий фініш для 5-го рівня
         { x: 1380, y: 0, width: 20, height: 150 }
     ],
+    9: [
+        { x: 1200, y: 100, width: 20, height: 150 }
+    ],
+    10: [
+        { x: 1360, y: 0, width: 20, height: 150 }
+    ]
 
 };
 let shiplevel = {
@@ -248,7 +270,18 @@ let shiplevel = {
         { x: 1280, y: 575 },
 
     ],
-
+    9: [
+        { x: 500, y: 725 },
+        { x: 520, y: 725 },
+        { x: 540, y: 725 },
+    ],
+    10: [
+        { x: 250, y: 580 },
+        { x: 260, y: 580 },
+        { x: 270, y: 580 },
+        { x: 1000, y: 280 },
+        { x: 1020, y: 280 },
+    ],
 
 };
 let colors = {
@@ -275,8 +308,13 @@ let colors = {
     ],
     8: [
         { plat: 'orange', background: 'rgb(255, 200, 100)', ship: 'darkorange' }
-    ]
-
+    ],
+    9: [
+        { plat: 'navy', background: 'lightcyan', ship: 'blue' }  
+    ],
+    10: [
+        { plat: 'darkgreen', background: '#ccffcc', ship: 'darkred' }
+    ],
 };
 
 let platforms = levels[level]
@@ -570,3 +608,4 @@ document.addEventListener("keyup", (e) => {
 });
 
 gameLoop();
+
