@@ -399,12 +399,24 @@ let colors = {
     10: [
         { plat: 'darkgreen', background: '#ccffcc', ship: 'darkred' }
     ],
+    11: [
+        { plat: 'darkred', background: 'rgb(255, 180, 180)', ship: 'red' } // Червоні сходинки
+    ],
+    12: [
+        { plat: 'darkblue', background: 'rgb(100, 100, 255)', ship: 'white' } // Темно-синій, білі шипи
+    ],
+    13: [
+        { plat: 'gold', background: 'rgb(255, 240, 150)', ship: 'brown' } // Золото
+    ],
+    14: [
+        { plat: 'darkgray', background: 'rgb(80, 80, 80)', ship: 'lime' } // Сірий тунель, лаймові шипи
+    ]
 };
 
 let platforms = levels[level]
 
 function changeLevel(newLevel) {
-    if (level == 10) {
+    if (level == 14) {
         alert('Перемога!')
     }
     if (levels[newLevel]) {
@@ -740,6 +752,7 @@ document.addEventListener("keyup", (e) => {
 });
 
 gameLoop();
+
 
 
 
